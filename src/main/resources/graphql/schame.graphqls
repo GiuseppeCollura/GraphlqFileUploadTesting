@@ -1,0 +1,96 @@
+"""
+Experimental (design) version for the CMS (content management system) of the CP (captive portal).
+"""
+
+scalar Upload
+
+"""
+The Captive portal page is the page that the users see when they want to connect to a guest Wi-Fi network.
+"""
+type captivePortal {
+    """
+    The unique id in the database.
+    """
+    id: ID!
+
+    """
+    The captive portal's unique id used in communication with the outside world.
+    """
+    externalId: String!
+
+    """
+    The page where the user is send to when authorisation is completed.
+    """
+    redirectPage: String
+
+    """
+    The maximum session duration of a user.
+    """
+    #TODO: not working because we can't send this field to CDO.
+    maximumSessionDuration: Int
+
+    #TODO: add 'enable' and 'publicationDate' fields.
+}
+
+"""
+The file that is saved within a captive portal directory.
+"""
+type file {
+    """
+    The name of the file.
+    """
+    name: String
+
+    """
+    The size of the file.
+
+    - Displayed in bytes
+    """
+    size: Int
+
+    """
+    The type of the file.
+    """
+    type: String
+}
+
+"""
+The Captive portal page input used to create a CP page.
+"""
+input captivePortalInput {
+
+    """
+    The page where the user is send to when authorisation is completed.
+    """
+    redirectPage: String
+
+    """
+    The maximum session duration of a user.
+    """
+    maximumSessionDuration: Int
+}
+
+"""
+The graphQl mutations that can be preformed.
+"""
+type Mutation {
+    """
+    Upload a file.
+
+    - The type doesn't matter for now (gets handled later on in the backend)
+    """
+    fileUpload(files: [Upload!], captivePortalId: ID): Boolean
+
+    """
+    Create a captive portal.
+    """
+    createCaptivePortal(cp: captivePortalInput): captivePortal
+}
+
+""""
+The graphQl queries that can be preformed.
+"""
+type Query{
+    #TODO: for now placeHolder.
+    workspace(captivePortalId: ID): [file]
+}

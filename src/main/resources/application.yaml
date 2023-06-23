@@ -1,0 +1,48 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  graphql:
+    graphiql:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console.enabled: true
+
+hawaii:
+  async:
+    enabled: false
+  crypto:
+    enabled: false
+  logging:
+    filters:
+      business-transaction-id:
+        enabled: false
+      client-ip-log:
+        enabled: false
+      container-name:
+        enabled: false
+      oidc:
+        enabled: true
+      open-telemetry-tracing-response:
+        enabled: false
+      request-duration:
+        enabled: true
+      request-response:
+        enabled: true
+      request-id:
+        enabled: false
+      software-version:
+        enabled: false
+      transaction-id:
+        enabled: false
+      transaction-type:
+        enabled: false
